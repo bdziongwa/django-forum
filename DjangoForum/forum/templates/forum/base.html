@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta charset="utf-8"/>
+
+    <title>Forum</title>
+    <meta http-equiv="content-type" content="text/html; charset=windows-1252"/>
+    {% load i18n %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'forum/style.css' %}" title="style"/>
+</head>
+
+<body>
+    <header>
+        <div id="logo">
+            <div id="logo_text">
+                <!-- class="logo_colour", allows you to change the colour of the text -->
+                <h1><a href="{% url 'forum:index' %}">Forum sportowe.</a></h1>
+            </div>
+            <div id="login">
+                {% if user.is_authenticated %}
+                    <p>Zalogowano jako <b>{{ user.username }}</b>.</p>
+                    <p><a href="/logout">Wyloguj</a></p>
+                {% else %}
+                    <p>Witaj.</p>
+                    <p><a href="/login">Zaloguj</a></p>
+                {% endif %}
+            </div>
+            <dib style="clear: both;" />
+        </div>
+    </header>
+    <article>
+        <div class="middle_block">
+            {% if user.is_authenticated %}
+                {% block content %}{% endblock %}
+            {% else %}
+                {% block notlogged %}{% endblock %}
+            {% endif %}
+        </div>
+        <div class="right_block">
+            {% if tags %}
+                 <h2>Tagi:</h2>
+                {% for tag in tags %}
+                    <h3><a href="{% url 'forum:tag' tag.id  %}">{{ tag.name }}</a></h3>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div style="clear: both;" />
+    </article>
+    <div class="bottom">
+        {% if users %}
+            {% for u in users %}
+                <p>{{ u.username }}</p>
+            {% endfor %}
+        {% endif %}
+    </div>
+</body>
+</html>
+
+

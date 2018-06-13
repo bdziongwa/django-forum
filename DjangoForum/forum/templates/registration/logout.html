@@ -1,0 +1,27 @@
+{% extends "quiz/base.html" %}
+{% load i18n %}
+
+{% block menubar %}
+    <ul id="menu">
+        <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
+        <li><a href="{% url 'quiz:index' %}">Home</a></li>
+        <li><a href="{% url 'quiz:list' %}">Quiz list</a></li>
+    </ul>
+{% endblock %}
+
+{% block title %}Login{% endblock %}
+
+{% block notlogged %}
+  <h2>Login</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+  </form>
+{% endblock %}
+
+
+{% block content %}
+    <p>Logged as <b>{{ user.username }}</b>.</p>
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "forum/base.html" %}
+{% load i18n %}
+
+{% block content %}
+    {% if topic %}
+        <h2>{{ topic.title }}</h2>
+        <h2>Lista postów dotyczących wątku:</h2>
+        {% if posts %}
+            {% for post in posts %}
+                <div class="post">
+                    <p>Autor: <b>{{ post.author }}</b></p>
+                    <p>Data utworzenia: <b>{{ post.created_date }}</b></p>
+                    <p>Data opublikowania: <b>{{ post.published_date }}</b></p>
+                    <p style="margin-left:40px; margin-top: 20px; margin-bottom: 20px;">{{ post.text }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Nie ma żadnych postów.</p>
+        {% endif %}
+        <H2>Dodaj odpowiedz:</H2>
+        <form class="form" action="{% url 'forum:topic' topic.id %}" method="post">
+            {% csrf_token %}
+            {{ form.as_ul }}
+            <input type="submit" value="Opublikuj">
+        </form>
+    {% else %}
+        <p>Wątek nie istnieje.</p>
+    {% endif %}
+{% endblock %}

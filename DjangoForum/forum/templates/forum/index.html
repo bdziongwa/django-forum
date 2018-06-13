@@ -1,0 +1,17 @@
+{% extends "forum/base.html" %}
+{% load i18n %}
+
+{% block content %}
+        <h2>Lista wątków na forum:</h2>
+            {% for domain in domains %}
+                <h3 class="domain">{{ domain.1 }}</h3>
+                {% for topic in topics %}
+                    {% if topic.domain == domain.0 %}
+                        <h3><a href="{% url 'forum:topic' topic.id %}">{{ topic.title }}</a></h3>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        <div class="button">
+            <a href="{% url 'forum:add-topic' %}">Dodaj nowy wątek.</a>
+        </div>
+{% endblock %}

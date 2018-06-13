@@ -1,0 +1,18 @@
+{% extends "forum/base.html" %}
+{% load i18n %}
+
+{% block content %}
+    <H2>Stworz nowy wątek:</H2>
+    <form class="form" action="{% url 'forum:add-topic' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_ul }}
+        <input type="submit" value="Stworz nowy wątek">
+    </form>
+
+    <H2>Stworz nowy tag:</H2>
+    <form class="form" action="{% url 'forum:add-tag' %}" method="post">
+        {% csrf_token %}
+        {{ formtag.as_ul }}
+        <input type="submit" value="Stworz nowy tag">
+    </form>
+{% endblock %}
