@@ -1,0 +1,6 @@
+admin panel:
+l: admin0
+h: admin123
+users:
+1. l:defensor h:bdziongwa
+2. l:messi_vs_ronaldo h: bdziongwa
